@@ -80,10 +80,11 @@ func sendMetric(client *http.Client, endpoint string) error {
 
 	request.Header.Add("Content-Type", "plain")
 
-	_, err = client.Do(request)
+	response, err := client.Do(request)
 	if err != nil {
 		return err
 	}
+	defer response.Body.Close()
 
 	return nil
 }
