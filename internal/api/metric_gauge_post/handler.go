@@ -4,25 +4,24 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics"
 	"github.com/gorilla/mux"
 )
 
 type handler struct {
-	metricsUC metrics.Usecase
+	metricsUC runtime_metrics.Usecase
 }
 
 func New(
-	metricsUC metrics.Usecase,
+	metricsUC runtime_metrics.Usecase,
 ) *handler {
 	return &handler{
 		metricsUC: metricsUC,
 	}
 }
 
-func (h *handler) GaugeHandler(w http.ResponseWriter, r *http.Request) {
-	typeMetric := "gauge"
+func (h *handler) Handle(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	w.WriteHeader(http.StatusOK)
 
 	metricName := vars["NAME"]
 	metricValue, err := strconv.ParseFloat(vars["VALUE"], 64)
@@ -31,10 +30,7 @@ func (h *handler) GaugeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	metricsStorage[metricName] = metricGauge{
-		typeMetric: typeMetric,
-		value:      metricValue,
-	}
+	h.metricsUC.SaveGaugeMetric(metricName, metricValue)
 
 	w.WriteHeader(http.StatusOK)
 }

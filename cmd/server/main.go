@@ -3,44 +3,24 @@ package main
 import (
 	"log"
 	"net/http"
-	"strconv"
 
-	"github.com/gorilla/mux"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/metric_gauge_post"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/repository"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/usecase"
 )
 
-type metricGauge struct {
-	typeMetric string
-	value      float64
-}
-
-var metricsStorage = map[string]metricGauge{}
-
-func GaugeHandler(w http.ResponseWriter, r *http.Request) {
-	typeMetric := "gauge"
-	vars := mux.Vars(r)
-	w.WriteHeader(http.StatusOK)
-
-	metricName := vars["NAME"]
-	metricValue, err := strconv.ParseFloat(vars["VALUE"], 64)
-	if err != nil {
-		http.Error(w, "can't parse a float64. internal error", http.StatusInternalServerError)
-		return
-	}
-
-	metricsStorage[metricName] = metricGauge{
-		typeMetric: typeMetric,
-		value:      metricValue,
-	}
-
-	w.WriteHeader(http.StatusOK)
-}
-
 func main() {
-	router := mux.NewRouter()
-	router.HandleFunc("update/gauge/{NAME}/{VALUE}", GaugeHandler).Methods(http.MethodPost)
-	http.Handle("/", router)
+	metricsStorage := map[string]entity.MetricGauge{}
 
-	log.Println("start server")
+	metricsRepo := repository.New(metricsStorage)
+	metricsUC := usecase.New(metricsRepo)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	handler := metric_gauge_post.New(metricsUC)
+
+	server := api.New()
+	server.AddHandler(http.MethodPost, "update/gauge/{NAME}/{VALUE}", handler)
+
+	log.Fatal(server.Run())
 }
