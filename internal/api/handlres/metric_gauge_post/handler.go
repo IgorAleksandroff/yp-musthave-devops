@@ -4,16 +4,16 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection"
 	"github.com/gorilla/mux"
 )
 
 type handler struct {
-	metricsUC runtime_metrics.Usecase
+	metricsUC metrics_collection.Usecase
 }
 
 func New(
-	metricsUC runtime_metrics.Usecase,
+	metricsUC metrics_collection.Usecase,
 ) *handler {
 	return &handler{
 		metricsUC: metricsUC,

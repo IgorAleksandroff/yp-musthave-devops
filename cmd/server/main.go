@@ -5,10 +5,10 @@ import (
 	"net/http"
 
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/metric_gauge_post"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/entity"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/repository"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/usecase"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/handlres/metric_gauge_post"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/repository"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/usecase"
 )
 
 func main() {
