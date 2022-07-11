@@ -5,9 +5,13 @@ import (
 )
 
 type rep struct {
-	storage map[string]entity.MetricGauge
+	gaugeDB   map[string]entity.MetricGauge
+	counterDB map[string]entity.MetricCounter
 }
 
-func New(metricsStorage map[string]entity.MetricGauge) *rep {
-	return &rep{storage: metricsStorage}
+func New() *rep {
+	return &rep{
+		gaugeDB:   make(map[string]entity.MetricGauge),
+		counterDB: make(map[string]entity.MetricCounter),
+	}
 }
