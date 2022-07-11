@@ -12,6 +12,7 @@ func (u usecase) UpdateMetrics() {
 	pollCount, err := u.repository.GetMetric("PollCount")
 	if err != nil {
 		log.Println(err)
+		pollCount = entity.Metric{Value: entity.Counter(0)}
 	}
 	pollCountInt := int64(pollCount.Value.(entity.Counter)) + 1
 	randomValue := int64(rand.Int())

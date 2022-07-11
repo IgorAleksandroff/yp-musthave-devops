@@ -1,6 +1,6 @@
 package runtimemetrics
 
-//go:generate mockery -name Usecase
+//go:generate mockery --name Usecase
 
 type Usecase interface {
 	UpdateMetrics()

@@ -2,7 +2,7 @@ package runtimemetrics
 
 import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimemetrics/entity"
 
-//go:generate mockery -name Repository
+//go:generate mockery --name Repository
 
 type Repository interface {
 	SaveMetric(name string, value entity.Getter)

@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-//go:generate mockery -name "Client"
+//go:generate mockery --name "Client"
 
 const DevopsServerURL = "http://127.0.0.1:8080"
 
