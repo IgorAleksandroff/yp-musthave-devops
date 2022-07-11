@@ -32,6 +32,9 @@ func NewClient() Client {
 
 func (c client) Do(req *http.Request) (body []byte, err error) {
 	r, err := c.transport.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer r.Body.Close()
 
 	body, err = ioutil.ReadAll(r.Body)

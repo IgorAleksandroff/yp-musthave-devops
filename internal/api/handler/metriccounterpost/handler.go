@@ -26,7 +26,7 @@ func (h *handler) Handle(w http.ResponseWriter, r *http.Request) {
 	metricName := vars["NAME"]
 	metricValue, err := strconv.ParseInt(vars["VALUE"], 10, 64)
 	if err != nil {
-		http.Error(w, "can't parse a int64. internal error", http.StatusInternalServerError)
+		http.Error(w, "can't parse a int64. internal error", http.StatusBadRequest)
 		return
 	}
 
