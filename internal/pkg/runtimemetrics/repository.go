@@ -1,6 +1,6 @@
-package runtimeMetrics
+package runtimemetrics
 
-import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimeMetrics/entity"
+import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimemetrics/entity"
 
 //go:generate mockery -name Repository
 

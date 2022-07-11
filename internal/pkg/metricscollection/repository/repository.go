@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection/entity"
 )
 
 type rep struct {

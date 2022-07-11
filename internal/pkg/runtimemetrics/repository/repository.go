@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimeMetrics/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimemetrics/entity"
 )
 
 type rep struct {

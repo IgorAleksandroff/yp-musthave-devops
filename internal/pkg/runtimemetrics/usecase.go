@@ -1,4 +1,4 @@
-package runtimeMetrics
+package runtimemetrics
 
 //go:generate mockery -name Usecase
 

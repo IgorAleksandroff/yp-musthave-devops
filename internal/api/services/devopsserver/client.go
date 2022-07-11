@@ -1,4 +1,4 @@
-package devopsServer
+package devopsserver
 
 import (
 	"bytes"

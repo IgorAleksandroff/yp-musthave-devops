@@ -1,19 +1,19 @@
-package metricGaugePost
+package metricgaugepost
 
 import (
 	"net/http"
 	"strconv"
 
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection"
 	"github.com/gorilla/mux"
 )
 
 type handler struct {
-	metricsUC metricsCollection.Usecase
+	metricsUC metricscollection.Usecase
 }
 
 func New(
-	metricsUC metricsCollection.Usecase,
+	metricsUC metricscollection.Usecase,
 ) *handler {
 	return &handler{
 		metricsUC: metricsUC,
