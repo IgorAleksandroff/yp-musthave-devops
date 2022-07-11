@@ -1,4 +1,4 @@
-package metrics_collection
+package metricsCollection
 
 //go:generate mockery -name Usecase
 

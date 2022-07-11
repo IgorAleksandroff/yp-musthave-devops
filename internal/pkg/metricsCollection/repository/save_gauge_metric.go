@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/entity"
+import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection/entity"
 
 func (r rep) SaveGaugeMetric(name string, value float64) {
 	r.storage[name] = entity.MetricGauge{

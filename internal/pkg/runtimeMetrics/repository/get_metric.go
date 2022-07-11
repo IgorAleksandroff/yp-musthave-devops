@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtime_metrics/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/runtimeMetrics/entity"
 )
 
 func (r rep) GetMetric(name string) (m entity.Metric, err error) {

@@ -5,10 +5,10 @@ import (
 	"net/http"
 
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/handlres/metric_gauge_post"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/entity"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/repository"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metrics_collection/usecase"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/handlres/metricGaugePost"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection/entity"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection/repository"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricsCollection/usecase"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	metricsRepo := repository.New(metricsStorage)
 	metricsUC := usecase.New(metricsRepo)
 
-	handler := metric_gauge_post.New(metricsUC)
+	handler := metricGaugePost.New(metricsUC)
 
 	server := api.New()
 	server.AddHandler(http.MethodPost, "update/gauge/{NAME}/{VALUE}", handler)
