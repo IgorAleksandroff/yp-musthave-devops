@@ -1,7 +1,7 @@
 package entity
 
 const GaugeTypeMetric = "gauge"
-const CounterTypeMetric = "gauge"
+const CounterTypeMetric = "counter"
 
 type MetricGauge struct {
 	TypeMetric string
