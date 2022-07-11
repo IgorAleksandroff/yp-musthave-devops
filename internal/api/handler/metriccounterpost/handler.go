@@ -1,4 +1,4 @@
-package metricсounterpost
+package metriccounterpost
 
 import (
 	"net/http"

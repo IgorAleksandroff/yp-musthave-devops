@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api"
-	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/handlres/metricgaugepost"
+	"github.com/IgorAleksandroff/yp-musthave-devops/internal/api/handler/metricgaugepost"
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection/repository"
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection/usecase"
 )
