@@ -16,7 +16,7 @@ type server struct {
 
 func New() *server {
 	r := mux.NewRouter()
-	r.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+	r.NotFoundHandler = http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		http.Error(writer, "unknown handler", http.StatusNotImplemented)
 	})
 
