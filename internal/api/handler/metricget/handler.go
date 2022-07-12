@@ -1,8 +1,8 @@
-package metricpost
+package metricget
 
 import (
+	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection"
 	"github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection/entity"
@@ -22,30 +22,33 @@ func New(
 }
 
 func (h *handler) Handle(w http.ResponseWriter, r *http.Request) {
+	var value string
+	var err error
 	metricType := chi.URLParam(r, "TYPE")
 	metricName := chi.URLParam(r, "NAME")
 
 	switch metricType {
 	case entity.CounterTypeMetric:
-		counterValue, err := strconv.ParseInt(chi.URLParam(r, "VALUE"), 10, 64)
-		if err != nil {
-			http.Error(w, "can't parse a int64. internal error", http.StatusBadRequest)
-			return
-		}
+		valueMetric, errMetric := h.metricsUC.GetCounterMetric(metricName)
+		value = fmt.Sprintf("%v", valueMetric)
+		err = errMetric
 
-		h.metricsUC.SaveCounterMetric(metricName, counterValue)
 	case entity.GaugeTypeMetric:
-		gaugeValue, err := strconv.ParseFloat(chi.URLParam(r, "VALUE"), 64)
-		if err != nil {
-			http.Error(w, "can't parse a float64. internal error", http.StatusBadRequest)
-			return
-		}
+		valueMetric, errMetric := h.metricsUC.GetGaugeMetric(metricName)
+		value = fmt.Sprintf("%v", valueMetric)
+		err = errMetric
 
-		h.metricsUC.SaveGaugeMetric(metricName, gaugeValue)
 	default:
 		http.Error(w, "unknown handler", http.StatusNotImplemented)
 		return
 	}
 
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("content-type", "text/plain")
 	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(value))
 }

@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi"
 )
 
 type Handler interface {
@@ -11,17 +11,17 @@ type Handler interface {
 }
 
 type server struct {
-	router *mux.Router
+	router *chi.Mux
 }
 
 func New() *server {
-	r := mux.NewRouter()
+	r := chi.NewRouter()
 
 	return &server{router: r}
 }
 
 func (s *server) AddHandler(method, path string, h Handler) {
-	s.router.HandleFunc(path, h.Handle).Methods(method)
+	s.router.MethodFunc(method, path, h.Handle)
 }
 
 func (s *server) Run() error {

@@ -18,6 +18,7 @@ func main() {
 
 	server := api.New()
 	server.AddHandler(http.MethodPost, "/update/{TYPE}/{NAME}/{VALUE}", handler)
+	server.AddHandler(http.MethodGet, "/value/{TYPE}/{NAME}", handler)
 
 	log.Fatal(server.Run())
 }
