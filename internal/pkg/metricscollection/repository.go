@@ -1,5 +1,7 @@
 package metricscollection
 
+import "github.com/IgorAleksandroff/yp-musthave-devops/internal/pkg/metricscollection/entity"
+
 //go:generate mockery --name Repository
 
 type Repository interface {
@@ -7,4 +9,6 @@ type Repository interface {
 	SaveCounterMetric(name string, value int64)
 	GetGaugeMetric(name string) (float64, error)
 	GetCounterMetric(name string) (int64, error)
+	GetGaugeMetrics() map[string]entity.MetricGauge
+	GetCounterMetrics() map[string]entity.MetricCounter
 }

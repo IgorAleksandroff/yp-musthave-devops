@@ -51,6 +51,22 @@ func (_m *Usecase) GetGaugeMetric(name string) (float64, error) {
 	return r0, r1
 }
 
+// GetMetricsValue provides a mock function with given fields:
+func (_m *Usecase) GetMetricsValue() map[string]string {
+	ret := _m.Called()
+
+	var r0 map[string]string
+	if rf, ok := ret.Get(0).(func() map[string]string); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(map[string]string)
+		}
+	}
+
+	return r0
+}
+
 // SaveCounterMetric provides a mock function with given fields: name, value
 func (_m *Usecase) SaveCounterMetric(name string, value int64) {
 	_m.Called(name, value)

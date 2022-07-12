@@ -7,4 +7,5 @@ type Usecase interface {
 	SaveCounterMetric(name string, value int64)
 	GetGaugeMetric(name string) (float64, error)
 	GetCounterMetric(name string) (int64, error)
+	GetMetricsValue() map[string]string
 }
